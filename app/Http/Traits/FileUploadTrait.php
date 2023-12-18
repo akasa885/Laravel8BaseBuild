@@ -3,14 +3,27 @@
 namespace App\Http\Traits;
 
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 trait FileUploadTrait
 {
+    /**
+     * 
+     * @param mixed $file 
+     * @param string $pathFolder 
+     * @param string|null $identifierFolder 
+     * @param string|null $identifierSubFolder 
+     * @param bool $returnIdentifierWithFile 
+     * @param bool $saveToStorage 
+     * @param bool $encryptFileName 
+     * @return string|string[]|void 
+     * @throws Throwable 
+     */
     public function uploadFile(
         $file,  
         $pathFolder = 'image', // path after (public/) ex: image, document, image/media, etc
-        $identifierFolder = null, // of the identifier
-        $identifierSubFolder = null, // of the identifier sub folder
+        string $identifierFolder = null, // of the identifier
+        string $identifierSubFolder = null, // of the identifier sub folder
         $returnIdentifierWithFile = false, // return identifier with file name
         $saveToStorage = false, // save to storage
         $encryptFileName = true // encrypt file name
@@ -51,6 +64,13 @@ trait FileUploadTrait
         }
     }
 
+    /**
+     * 
+     * @param string $fileName 
+     * @param string $path 
+     * @param mixed $file 
+     * @return string 
+     */
     private function storeToStorage(string $fileName, string $path, $file): string
     {
         $filepath = Storage::disk('public')->putFileAs($path, $file, $fileName);
@@ -58,6 +78,11 @@ trait FileUploadTrait
         return $filepath;
     }
 
+    /**
+     * 
+     * @param string $path 
+     * @return string 
+     */
     private function cleanPath($path)
     {
         // Check if the path has a slash at the start
@@ -76,6 +101,11 @@ trait FileUploadTrait
         return $path;
     }
 
+    /**
+     * 
+     * @param mixed $args 
+     * @return string 
+     */
     private function buildPath(...$args)
     {
         $path = '';
@@ -89,6 +119,11 @@ trait FileUploadTrait
         return $path;
     }
 
+    /**
+     * 
+     * @param mixed $args 
+     * @return string 
+     */
     private function buildIdentifierFolder(...$args)
     {
         $path = '';
@@ -109,7 +144,12 @@ trait FileUploadTrait
         return $path;
     }
 
-    private function encryptFileName($filename)
+    /**
+     * 
+     * @param string $filename 
+     * @return string 
+     */
+    private function encryptFileName(string $filename)
     {
         $filename = md5($filename.'-'.time());
 
