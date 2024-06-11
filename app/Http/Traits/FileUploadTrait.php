@@ -15,6 +15,7 @@ trait FileUploadTrait
      * @param string|null $identifierSubFolder 
      * @param bool $returnIdentifierWithFile 
      * @param bool $saveToStorage 
+     * @param bool $storagePublic
      * @param bool $encryptFileName 
      * @return string|string[]|void 
      * @throws Throwable 
@@ -26,12 +27,14 @@ trait FileUploadTrait
         string $identifierSubFolder = null, // of the identifier sub folder
         $returnIdentifierWithFile = false, // return identifier with file name
         $saveToStorage = false, // save to storage
+        $storagePublic = true, // save to storage public
         $encryptFileName = true // encrypt file name
     ){
         try {
             if ($file != null) {
                 $fileNameWithExt = $file->getClientOriginalName();
                 $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                $originalFilename = $filename;
                 $extension = $file->getClientOriginalExtension();
 
                 if ($encryptFileName) $filename = $this->encryptFileName($filename);
@@ -39,7 +42,29 @@ trait FileUploadTrait
                 $filenameSimpan = $filename . '.' . $extension;
 
                 if ($saveToStorage) {
-                    $path = $this->storeToStorage($filenameSimpan, $pathFolder, $file);
+                    if ($storagePublic) $path = $this->storeToStoragePublic($filenameSimpan, $pathFolder, $file, true);
+                    else $path = $this->storeToStorage($filenameSimpan, $pathFolder, $file, false);
+                    
+                    if ($returnIdentifierWithFile) {
+                        if ($storagePublic) {
+                            $fileDetail = [
+                                'original_filename' => $originalFilename,
+                                'filename' => $filenameSimpan,
+                                'path' => $path,
+                                'url' => Storage::disk('public')->url($path),
+                            ];
+                        } else {
+                            $fileDetail = [
+                                'original_filename' => $originalFilename,
+                                'filename' => $filenameSimpan,
+                                'path' => $path,
+                                'url' => route('storage.view.file', $path),
+                            ];
+                        }
+                        
+                        return $fileDetail;
+                    }
+
                     return $path;
                 }
 
@@ -69,11 +94,35 @@ trait FileUploadTrait
      * @param string $fileName 
      * @param string $path 
      * @param mixed $file 
+     * @param bool $url
      * @return string 
      */
-    private function storeToStorage(string $fileName, string $path, $file): string
+    private function storeToStorage(string $fileName, string $path, $file, $url = false): string
+    {
+        $filepath = Storage::disk('local')->putFileAs($path, $file, $fileName);
+
+        if ($url) {
+            $filepath = Storage::disk('local')->url($filepath);
+        }
+
+        return $filepath;
+    }
+
+    /**
+     * 
+     * @param string $fileName 
+     * @param string $path 
+     * @param mixed $file 
+     * @param bool $url 
+     * @return string 
+     */
+    private function storeToStoragePublic(string $fileName, string $path, $file, $url = false): string
     {
         $filepath = Storage::disk('public')->putFileAs($path, $file, $fileName);
+
+        if ($url) {
+            $filepath = Storage::disk('public')->url($filepath);
+        }
 
         return $filepath;
     }
