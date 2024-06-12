@@ -24,9 +24,9 @@
                                     <ul>
                                         @foreach ($answers as $key => $answer)
                                             <li>
-                                                <input type="radio" name="answers[{{ $question->id }}]" id="answer-{{ $key }}"
+                                                <input type="radio" name="answers[{{ $question->id }}]" id="answer-{{ $question->id.'-'.$key }}"
                                                     value="{{ $answer->value }}">
-                                                <label for="answer-{{ $key }}">{{ $answer->label }}</label>
+                                                <label for="answer-{{ $question->id.'-'.$key }}">{{ $answer->label }}</label>
                                             </li>
                                         @endforeach
                                     </ul>

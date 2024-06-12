@@ -45,7 +45,7 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
                 <h1 class="sitename">{{ config('app.name', 'Laravel') }}</h1>
                 <span>.</span>
             </a>
