@@ -20,6 +20,10 @@ Route::get('/', function () {
 
 Route::prefix('storage')->name('storage.')->group(__DIR__.'/open/storage-view.php');
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false,
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
