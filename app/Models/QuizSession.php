@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class QuizSession extends Model
 {
@@ -25,5 +26,14 @@ class QuizSession extends Model
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function scopeOpenQuiz($query)
+    {
+        return $query->where(function ($query) {
+            $query->whereNull('started_at')->where('is_open', true);
+        })->orWhere(function ($query) {
+            $query->where('started_at', '<=', Carbon::now())->where('ended_at', '>=', Carbon::now());
+        });
     }
 }

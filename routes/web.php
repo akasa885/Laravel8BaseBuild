@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('storage')->name('storage.')->group(__DIR__.'/open/storage-view.php');
+Route::prefix('quiz')->name('quiz.')->group(__DIR__.'/open/quizopen.php');
 
 Auth::routes([
     'register' => false,
