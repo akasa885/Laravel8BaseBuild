@@ -11,11 +11,12 @@ class KuisonerController extends Controller
     {
         $quizSession = QuizSession::where('token', $token)->openQuiz()->firstOrFail();
         $quizSession->load('quiz', 'quiz.questions');
+        $quiz = $quizSession->quiz;
 
         return view('pages.quiz-page', 
         [
             'title' => 'Quiz - ' . $quizSession->quiz->title,
         ],
-        compact('quizSession'));
+        compact('quizSession', 'quiz'));
     }
 }
