@@ -172,124 +172,156 @@
     <script src="assets/js/main.js"></script>
 
     <script>
-        var value = 80; // Example value
-        var colorStops;
+        const componentChartGauge = function() {
+            var valueChart = 80; // Example value
+            var colorStops;
+            var options;
 
-        if (value <= 50) {
-            colorStops = [{
-                    offset: 0,
-                    color: '#00FF00',
-                    opacity: 1
-                },
-                {
-                    offset: 100,
-                    color: '#00FF00',
-                    opacity: 1
-                }
-            ];
-        } else if (value > 50 && value <= 80) {
-            colorStops = [{
-                    offset: 0,
-                    color: '#00FF00',
-                    opacity: 1
-                },
-                {
-                    offset: ((value - 50) / 30) * 60,
-                    color: '#FFA500',
-                    opacity: 1
-                },
-                {
-                    offset: 100,
-                    color: '#C7592E',
-                    opacity: 1
-                }
-            ];
-        } else {
-            colorStops = [{
-                    offset: 0,
-                    color: '#00FF00',
-                    opacity: 1
-                },
-                {
-                    offset: 50,
-                    color: '#FFA500',
-                    opacity: 1
-                },
-                {
-                    offset: 100,
-                    color: '#FF0000',
-                    opacity: 1
-                }
-            ];
-        }
-
-        var options = {
-            chart: {
-                type: 'radialBar',
-                offsetY: -20,
-                sparkline: {
-                    enabled: true
-                }
-            },
-            plotOptions: {
-                radialBar: {
-                    startAngle: -90,
-                    endAngle: 90,
-                    track: {
-                        background: "#e7e7e7",
-                        strokeWidth: '97%',
-                        margin: 5, // margin is in pixels
-                        dropShadow: {
-                            enabled: true,
-                            top: 2,
-                            left: 0,
-                            color: '#999',
-                            opacity: 1,
-                            blur: 2
-                        }
-                    },
-                    dataLabels: {
-                        name: {
-                            show: true,
-                            fontSize: '22px',
+            _getColorStops = function(value) {
+                if (value <= 50) {
+                    colorStops = [{
+                            offset: 0,
+                            color: '#00FF00',
+                            opacity: 1
                         },
-                        value: {
-                            show: true,
-                            fontSize: '28px',
-                            offsetY: -50,
-                            formatter: function(val) {
-                                return val + 'pts';
-                            }
+                        {
+                            offset: 100,
+                            color: '#00FF00',
+                            opacity: 1
+                        }
+                    ];
+                } else if (value > 50 && value <= 80) {
+                    colorStops = [{
+                            offset: 0,
+                            color: '#00FF00',
+                            opacity: 1
+                        },
+                        {
+                            offset: ((value - 50) / 30) * 60,
+                            color: '#FFA500',
+                            opacity: 1
+                        },
+                        {
+                            offset: 100,
+                            color: '#C7592E',
+                            opacity: 1
+                        }
+                    ];
+                } else {
+                    colorStops = [{
+                            offset: 0,
+                            color: '#00FF00',
+                            opacity: 1
+                        },
+                        {
+                            offset: 50,
+                            color: '#FFA500',
+                            opacity: 1
+                        },
+                        {
+                            offset: 100,
+                            color: '#FF0000',
+                            opacity: 1
+                        }
+                    ];
+                }
+
+                return colorStops;
+            }
+
+            _setChartOptions = function(value = null) {
+                options = {
+                    chart: {
+                        type: 'radialBar',
+                        offsetY: -20,
+                        sparkline: {
+                            enabled: true
                         }
                     },
-                }
-            },
-            grid: {
-                padding: {
-                    top: -10
-                }
-            },
-            fill: {
-                type: 'gradient',
-                gradient: {
-                    shade: 'dark',
-                    type: 'horizontal',
-                    shadeIntensity: 0.5,
-                    // gradient colors, green ,orange, red
-                    gradientToColors: ['#FF4560'],
-                    inverseColors: true,
-                    opacityFrom: 1,
-                    opacityTo: 1,
-                    stops: [0, 30, 80, 100],
-                    colorStops: colorStops,
-                }
-            },
-            labels: ['Stress Level'],
-            series: [value],
-        };
+                    plotOptions: {
+                        radialBar: {
+                            startAngle: -90,
+                            endAngle: 90,
+                            track: {
+                                background: "#e7e7e7",
+                                strokeWidth: '97%',
+                                margin: 5, // margin is in pixels
+                                dropShadow: {
+                                    enabled: true,
+                                    top: 2,
+                                    left: 0,
+                                    color: '#999',
+                                    opacity: 1,
+                                    blur: 2
+                                }
+                            },
+                            dataLabels: {
+                                name: {
+                                    show: true,
+                                    fontSize: '22px',
+                                },
+                                value: {
+                                    show: true,
+                                    fontSize: '28px',
+                                    offsetY: -50,
+                                    formatter: function(val) {
+                                        return val + 'pts';
+                                    }
+                                }
+                            },
+                        }
+                    },
+                    grid: {
+                        padding: {
+                            top: -10
+                        }
+                    },
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            shade: 'dark',
+                            type: 'horizontal',
+                            shadeIntensity: 0.5,
+                            // gradient colors, green ,orange, red
+                            gradientToColors: ['#FF4560'],
+                            inverseColors: true,
+                            opacityFrom: 1,
+                            opacityTo: 1,
+                            stops: [0, 30, 80, 100],
+                            colorStops: _getColorStops(value ?? valueChart)
+                        }
+                    },
+                    labels: ['Stress Level'],
+                    series: [value],
+                };
+            }
 
-        var chart = new ApexCharts(document.querySelector("#chartGauge"), options);
-        chart.render();
+            return {
+                init: function() {
+                    _setChartOptions(valueChart);
+                    var chart = new ApexCharts(document.querySelector("#chartGauge"), options);
+                    chart.render();
+                },
+                update: function(value) {
+                    _setChartOptions(value);
+                    document.querySelector("#chartGauge").innerHTML = '';
+                    var chart = new ApexCharts(document.querySelector("#chartGauge"), options);
+                    chart.render();
+                }
+            }
+        }();
+
+        // ready
+        document.addEventListener('DOMContentLoaded', function() {
+            componentChartGauge.init();
+            setInterval(function() {
+                var value = Math.floor(Math.random() * 100);
+                componentChartGauge.update(value);
+            }, 3000);
+        });
+
+
+        
     </script>
 
 </body>
