@@ -1,6 +1,5 @@
 /node_modules
 /public/app/*
-/public/assets
 /public/mix-manifest.json
 /public/hot
 /public/storage
