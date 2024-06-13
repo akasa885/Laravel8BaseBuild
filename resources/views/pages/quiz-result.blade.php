@@ -34,6 +34,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--begin::referensi-->
+                            <div class="quiz-referensi">
+                                <h4><strong>Referensi</strong></h4>
+                                <p>PERCEIVED STRESS SCALE by Sheldon Cohen, Ph.D.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
