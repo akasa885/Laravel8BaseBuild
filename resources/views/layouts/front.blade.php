@@ -55,11 +55,12 @@
                     <li><a href="#hero" class="active">Home<br></a></li>
                     {{-- <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li> --}}
+                    <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-
-            {{-- <a class="btn-getstarted" href="index.html#about">Get Started</a> --}}
+{{-- 
+            <a class="btn-getstarted" href="{{ route('login') }}">Login</a> --}}
         </div>
     </header>
 
