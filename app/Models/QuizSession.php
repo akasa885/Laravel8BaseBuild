@@ -28,6 +28,11 @@ class QuizSession extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function attempts()
+    {
+        return $this->hasMany(QuizAttempt::class);
+    }
+
     public function scopeOpenQuiz($query)
     {
         return $query->where(function ($query) {
