@@ -11,24 +11,12 @@
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
                 <x-app.sidebar.menu-item-stand-alone title="Dasboards" icon="window" href="#" />
                 <x-app.sidebar.menu-content-heading title="Feature">
-
-                    <x-app.sidebar.accordion.menu-item-heading title="Transaction" icon="triangle" checkroute="user.transaction*">
+                    <x-app.sidebar.accordion.menu-item-heading title="Quizzes" icon="triangle" checkroute="user.transaction*">
                         <x-slot name="subLink">
-                            {{-- <x-app.sidebar.accordion.menu-item-link title="My Transaction" href="{{ route('user.transaction.index') }}" />
-                            <x-app.sidebar.accordion.menu-item-link title="Feedback" href="{{ route('user.transaction.feedback.index') }}" /> --}}
+                            <x-app.sidebar.accordion.menu-item-link title="Quiz" href="#" />
+                            {{-- <x-app.sidebar.accordion.menu-item-link title="Feedback" href="{{ route('user.transaction.feedback.index') }}" /> --}}
                         </x-slot>
                     </x-app.sidebar.accordion.menu-item-heading>
-                    <x-app.sidebar.accordion.menu-item-heading title="Payment Methods" icon="box-side" checkroute="user.payment-method*">
-                        <x-slot name="subLink">
-                            {{-- <x-app.sidebar.accordion.menu-item-link title="Setting Payment Method" href="{{ route('user.payment-method.index') }}" /> --}}
-                        </x-slot>
-                    </x-app.sidebar.accordion.menu-item-heading>
-                    <x-app.sidebar.accordion.menu-item-heading title="Shipping Information" icon="clover" checkroute="user.shipping-information*">
-                        <x-slot name="subLink">
-                            {{-- <x-app.sidebar.accordion.menu-item-link title="Setting Shipping Information" href="{{ route('user.shipping-information.index') }}" /> --}}
-                        </x-slot>
-                    </x-app.sidebar.accordion.menu-item-heading>
-
                 </x-app.sidebar.menu-content-heading>
             </div>
             <!--end::Menu-->
@@ -38,7 +26,7 @@
     <!--end::sidebar menu-->
     <!--begin::Footer-->
     <div class="app-sidebar-footer flex-column-auto pt-2 pb-6 px-6" id="kt_app_sidebar_footer">
-        <a href="#" class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="200+ in-house components and 3rd-party plugins">
+        <a href="#" class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click" title="Contact Our IT in WhastApp">
             <span class="btn-label">Support</span>
             <!--begin::Svg Icon | path: icons/duotune/general/gen005.svg-->
             <span class="svg-icon btn-icon svg-icon-2 m-0">

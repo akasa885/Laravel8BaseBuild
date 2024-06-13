@@ -11,13 +11,10 @@
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
             data-aos="zoom-out">
             <img src="assets/img/hero-img.svg" class="img-fluid animated" alt="">
-            <h1>Welcome to <span>HeroBiz</span></h1>
-            <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
+            <h1>Welcome to <span>Upquality Personal Test</span></h1>
+            <p>Ikuti tes stres dan dapatkan hasilnya sekarang!, Dapat berkonsultasi dengan ahlinya 1</p>
             <div class="d-flex">
-                <a href="#about" class="btn-get-started scrollto">Get Started</a>
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                    class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch
-                        Video</span></a>
+                <a href="#" class="btn-get-started scrollto">Get Started</a>
             </div>
         </div>
 
