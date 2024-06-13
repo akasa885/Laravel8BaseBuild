@@ -68,12 +68,10 @@
                     lowCalc = Math.round(low / 5);
                     highCalc = Math.round(high / 5);
                     median = Math.round((highCalc - lowCalc) / 2);
-                    console.log('value calc ' + valueCalc, 'value ' + value);
-                    console.log('median ' + median, 'lowcalc + median ' + (lowCalc + median));
                     if (valueCalc <= (lowCalc + median)) {
-                        return ((value - 40) / 6) * 100
+                        return ((value - 40) / 16) * 100
                     } else {
-                        return ((value - 40) / 18) * 100
+                        return ((value - 40) / 20) * 100
                     }
                 }
             }
