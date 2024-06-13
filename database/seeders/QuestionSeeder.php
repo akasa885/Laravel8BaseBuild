@@ -50,6 +50,29 @@ class QuestionSeeder extends Seeder
             ],
         ];
 
+        $optionsInverted = [
+            0 => [
+                'label' => 'Tidak pernah',
+                'value' => 4
+            ],
+            1 => [
+                'label' => 'Hampir tidak pernah',
+                'value' => 3
+            ],
+            2 => [
+                'label' => 'Kadang-kadang',
+                'value' => 2
+            ],
+            3 => [
+                'label' => 'Cukup sering',
+                'value' => 1
+            ],
+            4 => [
+                'label' => 'Sangat sering',
+                'value' => 0
+            ],
+        ];
+
         $data = [
             [
                 'id' => 1,
@@ -79,7 +102,7 @@ class QuestionSeeder extends Seeder
                 'id' => 4,
                 'quiz_id' => 1,
                 'type' => 'radio',
-                'options' => json_encode($options),
+                'options' => json_encode($optionsInverted),
                 'question' => $kuisioner[3],
                 'created_at' => now(),
             ],
@@ -87,7 +110,7 @@ class QuestionSeeder extends Seeder
                 'id' => 5,
                 'quiz_id' => 1,
                 'type' => 'radio',
-                'options' => json_encode($options),
+                'options' => json_encode($optionsInverted),
                 'question' => $kuisioner[4],
                 'created_at' => now(),
             ],
@@ -103,7 +126,7 @@ class QuestionSeeder extends Seeder
                 'id' => 7,
                 'quiz_id' => 1,
                 'type' => 'radio',
-                'options' => json_encode($options),
+                'options' => json_encode($optionsInverted),
                 'question' => $kuisioner[6],
                 'created_at' => now(),
             ],
@@ -111,7 +134,7 @@ class QuestionSeeder extends Seeder
                 'id' => 8,
                 'quiz_id' => 1,
                 'type' => 'radio',
-                'options' => json_encode($options),
+                'options' => json_encode($optionsInverted),
                 'question' => $kuisioner[7],
                 'created_at' => now(),
             ],
