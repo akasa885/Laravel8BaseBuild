@@ -1,64 +1,65 @@
 @extends('layouts.front')
+@section('title', $title)
 
 @push('scripts_top')
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 @endpush
 
 @section('content')
-    <!-- Hero Section -->
-    <section id="hero" class="hero section">
+    <section id="quiz-result" class="quiz-result">
+        <div class="container" data-aos="fade-up">
 
-        <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
-            data-aos="zoom-out">
-            <img src="assets/img/hero-img.svg" class="img-fluid animated" alt="">
-            <h1>Welcome to <span>HeroBiz</span></h1>
-            <p>Et voluptate esse accusantium accusamus natus reiciendis quidem voluptates similique aut.</p>
-            <div class="d-flex">
-                <a href="#about" class="btn-get-started scrollto">Get Started</a>
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                    class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch
-                        Video</span></a>
+            <div class="section-title">
+                <h2>{{ $title }}</h2>
+                <p>{{ $quiz->description }}</p>
             </div>
-        </div>
 
-    </section><!-- /Hero Section -->
-
-    <!-- Gauge stress level view start test button -->
-    <section id="stress-gauge" class="start-test section">
-
-        <div class="container">
-
-            <div class="row gy-4">
-
-                <div class="col-lg-12 mb-3">
-                    <div class="gauge-stress-level">
-                        <div id="chartGauge"></div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="quiz-content">
+                        <div class="quiz-result-content">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="quiz-result">
+                                        <h3>Your Result</h3>
+                                        <p>{{ $resultPoint }} / {{ $answerLabeling }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="quiz-result">
+                                        <h3>Stress Level</h3>
+                                        <div class="gauge-stress-level">
+                                            <div id="chartGauge"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
-            <div class="row gy-4">
-
-                <div class="col-lg-12 mb-3">
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('quiz.quiz.open', ['token' => 's39o3n']) }}" class="btn btn-primary">Start
-                            Test</a>
-                    </div>
-                </div>
-
-            </div>
-
         </div>
-
     </section>
-    <!-- /Gauge stress level view start test button -->
 @endsection
+
+@php
+    function stressPointToPercentage($point) {
+        $maxPoint = 40;
+
+        if ($point <= 0) {
+            return 0;
+        } elseif ($point >= $maxPoint) {
+            return 100;
+        } else {
+            return ($point / $maxPoint) * 100;
+        }
+    }
+@endphp
 
 @push('scripts_bottom')
     <script>
         const componentChartGauge = function() {
-            var valueChart = 80; // Example value
+            var valueChart = {{ stressPointToPercentage($resultPoint) }};
             var colorStops;
             var options;
 
@@ -203,22 +204,11 @@
                     var chart = new ApexCharts(document.querySelector("#chartGauge"), options);
                     chart.render();
                 },
-                update: function(value) {
-                    _setChartOptions(value);
-                    document.querySelector("#chartGauge").innerHTML = '';
-                    var chart = new ApexCharts(document.querySelector("#chartGauge"), options);
-                    chart.render();
-                }
             }
         }();
 
-        // ready
         document.addEventListener('DOMContentLoaded', function() {
             componentChartGauge.init();
-            setInterval(function() {
-                var value = Math.floor(Math.random() * 100);
-                componentChartGauge.update(value);
-            }, 3000);
         });
     </script>
 @endpush
