@@ -17,7 +17,7 @@ Route::get('{token}')
     ->name('quiz.open')
     ->uses([KuisonerController::class, 'fill']);
 
-Route::get('{token}/result')
+Route::get('{token}/result/{attempt}')
     ->where('token', $stringRoute)
     ->name('quiz.result')
     ->uses([KuisonerController::class, 'result']);

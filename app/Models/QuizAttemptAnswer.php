@@ -26,4 +26,14 @@ class QuizAttemptAnswer extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
+    public function getAnswerAttribute($value)
+    {
+        return json_decode($value);
+    }
+
+    public function setAnswerAttribute($value)
+    {
+        $this->attributes['answer'] = json_encode($value);
+    }
 }

@@ -85,9 +85,7 @@ class KuisonerController extends Controller
             foreach ($validated['answers'] as $questionId => $answer) {
                 $answers[] = new QuizAttemptAnswer([
                     'question_id' => $questionId,
-                    'answer' => json_encode([
-                        'value' => $answer,
-                    ]),
+                    'answer' => [ 'value' => $answer ],
                 ]);
             }
 
@@ -95,29 +93,55 @@ class KuisonerController extends Controller
 
             DB::commit();
 
-            return redirect()->route('quiz.quiz.result', $quizSession->token);
+            return redirect()->route('quiz.quiz.result', ['token' => $token, 'attempt' => $quizAttempt]);
         } catch (\Throwable $th) {
             DB::rollBack();
             if (config('app.debug')) {
                 throw $th;
             }
-            
+
             return back()->withInput()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data.']);
         }
     }
 
-    public function result(Request $request, $token)
+    public function result(Request $request, $token, QuizAttempt $attempt)
     {
         $quizSession = QuizSession::where('token', $token)->openQuiz()->firstOrFail();
         $quizSession->load('quiz', 'quiz.questions');
         $quiz = $quizSession->quiz;
+        $answers = $attempt->answers;
+
+        [$resultPoint, $answerLabeling] = $this->stressTestCheck($answers);
 
         return view(
             'pages.quiz-result',
             [
                 'title' => 'Hasil Quiz - ' . $quizSession->quiz->title,
+                'quiz_attempt' => $attempt,
             ],
-            compact('quizSession', 'quiz')
+            compact('quizSession', 'quiz', 'resultPoint', 'answerLabeling')
         );
+    }
+
+    private function stressTestCheck($answer)
+    {
+        $jawaban = $answer->pluck('answer');
+        $pointAnswer = 0;
+
+        foreach ($jawaban as $jawab) {
+            $pointAnswer += $jawab->value;
+        }
+
+        $answerLabeling = 'Tidak Stres';
+
+        if ($pointAnswer >= 0 && $pointAnswer <= 13) {
+            $answerLabeling = 'Stres Ringan';
+        } elseif ($pointAnswer >= 14 && $pointAnswer <= 26) {
+            $answerLabeling = 'Stres Sedang';
+        } elseif ($pointAnswer >= 27 && $pointAnswer <= 40) {
+            $answerLabeling = 'Stres Berat';
+        }
+
+        return [$pointAnswer, $answerLabeling];
     }
 }
