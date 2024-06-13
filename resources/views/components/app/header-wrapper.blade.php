@@ -143,11 +143,7 @@
                 <!--end::Menu separator-->
                 <!--begin::Menu item-->
                 <div class="menu-item px-5">
-                    <a href="@auth('admin')
-                        {{ route('admin.profile.edit')}}
-                    @else
-                        {{ route('user.profile.edit')}}
-                    @endauth" class="menu-link px-5">Profil</a>
+                    <a href="#" class="menu-link px-5">Profil</a>
                 </div>
                 <!--end::Menu item-->
                 <!--begin::Menu separator-->

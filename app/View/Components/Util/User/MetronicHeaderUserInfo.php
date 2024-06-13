@@ -33,13 +33,14 @@ class MetronicHeaderUserInfo extends Component
 
     public function determineWithUserTypeIsLogin()
     {
-        if (auth()->guard('admin')->check()) {
-            $this->user = auth()->guard('admin')->user();
-        } else if (auth()->guard('web')->check()) {
-            $this->user = auth()->guard('web')->user();
-        } else {
-            $this->user = null;
-        }
+        $this->user = auth()->user();
+        // if (auth()->guard('admin')->check()) {
+        //     $this->user = auth()->guard('admin')->user();
+        // } else if (auth()->guard('web')->check()) {
+        //     $this->user = auth()->guard('web')->user();
+        // } else {
+        //     $this->user = null;
+        // }
     }
 
     /**

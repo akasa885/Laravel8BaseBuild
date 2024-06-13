@@ -9,23 +9,23 @@
         <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer" data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true">
             <!--begin::Menu-->
             <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false">
-                <x-app.sidebar.menu-item-stand-alone title="Dasboards" icon="window" href="{{ route('admin.dashboard') }}" />
+                <x-app.sidebar.menu-item-stand-alone title="Dasboards" icon="window" href="#" />
                 <x-app.sidebar.menu-content-heading title="Feature">
 
                     <x-app.sidebar.accordion.menu-item-heading title="Transaction" icon="triangle" checkroute="user.transaction*">
                         <x-slot name="subLink">
-                            <x-app.sidebar.accordion.menu-item-link title="My Transaction" href="{{ route('user.transaction.index') }}" />
-                            <x-app.sidebar.accordion.menu-item-link title="Feedback" href="{{ route('user.transaction.feedback.index') }}" />
+                            {{-- <x-app.sidebar.accordion.menu-item-link title="My Transaction" href="{{ route('user.transaction.index') }}" />
+                            <x-app.sidebar.accordion.menu-item-link title="Feedback" href="{{ route('user.transaction.feedback.index') }}" /> --}}
                         </x-slot>
                     </x-app.sidebar.accordion.menu-item-heading>
                     <x-app.sidebar.accordion.menu-item-heading title="Payment Methods" icon="box-side" checkroute="user.payment-method*">
                         <x-slot name="subLink">
-                            <x-app.sidebar.accordion.menu-item-link title="Setting Payment Method" href="{{ route('user.payment-method.index') }}" />
+                            {{-- <x-app.sidebar.accordion.menu-item-link title="Setting Payment Method" href="{{ route('user.payment-method.index') }}" /> --}}
                         </x-slot>
                     </x-app.sidebar.accordion.menu-item-heading>
                     <x-app.sidebar.accordion.menu-item-heading title="Shipping Information" icon="clover" checkroute="user.shipping-information*">
                         <x-slot name="subLink">
-                            <x-app.sidebar.accordion.menu-item-link title="Setting Shipping Information" href="{{ route('user.shipping-information.index') }}" />
+                            {{-- <x-app.sidebar.accordion.menu-item-link title="Setting Shipping Information" href="{{ route('user.shipping-information.index') }}" /> --}}
                         </x-slot>
                     </x-app.sidebar.accordion.menu-item-heading>
 
