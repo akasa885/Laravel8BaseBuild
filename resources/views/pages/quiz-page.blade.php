@@ -11,20 +11,28 @@
             </div>
 
             <div class="row">
+                <x-alert />
                 <div class="col-lg-8">
                     <div class="quiz-content">
                         <form action="{{ route('quiz.quiz.submit', ['token' => $quizSession->token]) }}" method="POST">
                             @csrf
                             @foreach ($quiz->questions as $question)
                                 <div class="question">
-                                    <h3>{{ $question->question }}</h3>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <h3>{{ $loop->iteration }}</h3>
+                                        </div>
+                                        <div class="col">
+                                            <h3>{{ $question->question }}</h3>
+                                        </div>
+                                    </div>
                                     @php
                                         $answers = $question->options;
                                     @endphp
                                     <ul>
                                         @foreach ($answers as $key => $answer)
                                             <li>
-                                                <input type="radio" name="answers[{{ $question->id }}]" id="answer-{{ $question->id.'-'.$key }}"
+                                                <input type="radio" name="answers[{{ $question->id }}]" required id="answer-{{ $question->id.'-'.$key }}"
                                                     value="{{ $answer->value }}">
                                                 <label for="answer-{{ $question->id.'-'.$key }}">{{ $answer->label }}</label>
                                             </li>
