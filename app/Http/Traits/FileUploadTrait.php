@@ -42,7 +42,7 @@ trait FileUploadTrait
                 $filenameSimpan = $filename . '.' . $extension;
 
                 if ($saveToStorage) {
-                    if ($storagePublic) $path = $this->storeToStoragePublic($filenameSimpan, $pathFolder, $file, true);
+                    if ($storagePublic) $path = $this->storeToStoragePublic($filenameSimpan, $pathFolder, $file, false);
                     else $path = $this->storeToStorage($filenameSimpan, $pathFolder, $file, false);
                     
                     if ($returnIdentifierWithFile) {

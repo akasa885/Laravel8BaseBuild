@@ -9,6 +9,8 @@
         "barryvdh/laravel-debugbar": "3.6.2",
         "barryvdh/laravel-dompdf": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
+        "glhd/aire": "^2.11",
+        "glhd/aire-bootstrap": "^2.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "laravel/framework": "^8.75",
